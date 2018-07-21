@@ -9,23 +9,34 @@
 </head>
 
 <body>
-    <section class="container box">
-        <article class="top-box">
-            <form>
-                <h1 class="idea">idea</h1>
-                <h1 class="box">Box</h1>
-                <input id="title-input" type="text" placeholder="Title"><br />
-                <input id="body-input" type="text" placeholder="Body"><br />  
-                <button class="save-btn">save</button><br />
-            </form>
-        </article>
+    <main class="container">
+        <form class="top-box">
+            <div>
+              <h1 class="idea">idea</h1>
+              <h1>box</h1>
+            </div>
+            <input class="title-input" type="text" placeholder="Title">
+            <textarea class="body-input" placeholder="Body"></textarea>
+            <button class="save-btn">save</button>
+        </form>
         
-        <input id="search-input" type="text" placeholder="Search">
+        <input class="search-input" type="text" placeholder="Search">
 
-        <article class="bottom-box"> </article>
-
-    </section>
-
+        <section class="bottom-box"> 
+          <article id="" class="card-container">
+            <div class="top-card-div">
+              <h2 class="title-of-card">title</h2>
+              <button class="delete-button"></button>
+            </div>
+            <p class="body-of-card">body</p>
+            <div class="bottom-card-div">
+              <button class="upvote"></button> 
+              <button class="downvote"></button> 
+              <p class="quality">quality: <span class="quality-variable">quality</span></p>
+            </div>
+          </article>
+        </section>
+    </main>
     <script src="./jquery/jquery-3.2.1.js"></script>
     <script src="./index.js"></script>
 </body>
