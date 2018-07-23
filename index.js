@@ -50,52 +50,53 @@ $('.save-btn').on('click', function(event) {
     $('form')[0].reset();
 });
 
-// $(".bottom-box").on('click', function(event){
-//     var currentQuality = $($(event.target).siblings('p.quality').children()[0]).text().trim();
-//     var qualityVariable;
+$(".bottom-box").on('click', function(event){
+    var currentQuality = $(event.target).siblings('p.quality').children().text();
+    var qualityLevel;
 
-//     if (event.target.className === "upvote" || event.target.className === "downvote"){
+    if (event.target.className === "upvote" || event.target.className === "downvote"){
 
-//         if (event.target.className === "upvote" && currentQuality === "plausible"){
-//             qualityVariable = "genius";
-//             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
+        if (event.target.className === "upvote" && currentQuality === "plausible"){
+            qualityLevel = "genius";
+            $(event.target).siblings('p.quality').children().text(qualityLevel);
                
-//         } else if (event.target.className === "upvote" && currentQuality === "swill") {
-//             qualityVariable = "plausible";
-//             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
+        } else if (event.target.className === "upvote" && currentQuality === "swill") {
+            qualityLevel = "plausible";
+            $(event.target).siblings('p.quality').children().text(qualityLevel);
                
-//         } else if (event.target.className === "downvote" && currentQuality === "plausible") {
-//             qualityVariable = "swill"
-//             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
+        } else if (event.target.className === "downvote" && currentQuality === "plausible") {
+            qualityLevel = "swill"
+            $(event.target).siblings('p.quality').children().text(qualityLevel);
 
-//         } else if (event.target.className === "downvote" && currentQuality === "genius") {
-//             qualityVariable = "plausible"
-//             $($(event.target).siblings('p.quality').children()[0]).text(qualityVariable);
+        } else if (event.target.className === "downvote" && currentQuality === "genius") {
+            qualityLevel = "plausible"
+            $(event.target).siblings('p.quality').children().text(qualityLevel);
 
-//         } else if (event.target.className === "downvote" && currentQuality === "swill") {
-//             qualityVariable = "swill";
+        } else if (event.target.className === "downvote" && currentQuality === "swill") {
+            qualityLevel = "swill";
         
-//         } else if (event.target.className === "upvote" && currentQuality === "genius") {
-//             qualityVariable = "genius";
-//         }
+        } else if (event.target.className === "upvote" && currentQuality === "genius") {
+            qualityLevel = "genius";
+        }
 
-//     var cardHTML = $(event.target).closest('.card-container');
-//     var cardHTMLId = cardHTML[0].id;
-//     var cardObjectInJSON = localStorage.getItem(cardHTMLId);
-//     var cardObjectInJS = JSON.parse(cardObjectInJSON);cardObject
+    var cardHTML = $(event.target).closest('.card-container');
+    var cardHTMLId = cardHTML.attr('id').charAt(4);
+    var cardObjectInJSON = localStorage.getItem(cardHTMLId - 1);
+    var cardObjectInJS = JSON.parse(cardObjectInJSON);
 
-//     cardObjectInJS.quality = qualityVariable;
+    cardObjectInJS.quality = qualityLevel;
 
-//     var newCardJSON = JSON.stringify(cardObjectInJS);
-//     localStorage.setItem(cardHTMLId, newCardJSON);
-//     }
+    var newCardJSON = JSON.stringify(cardObjectInJS);
+    localStorage.setItem(cardHTMLId - 1, newCardJSON);
+    }
    
-//     else if (event.target.className === "delete-button") {
-//         var cardHTML = $(event.target).closest('.card-container').remove();
-//         var cardHTMLId = cardHTML[0].id;
-//         localStorage.removeItem(cardHTMLId);
-//     }
-// });
+    else if (event.target.className === "delete-button") {
+        var cardHTML = $(event.target).closest('.card-container');
+        var cardHTMLId = cardHTML.attr('id').charAt(4);
+        localStorage.removeItem(cardHTMLId - 1);
+        cardHTML.remove();
+    }
+});
       
 
 
