@@ -1,7 +1,3 @@
-var titleInput = $('.title-input');
-var bodyInput = $('.body-input');
-var qualityVariable = "swill";
-
 var newCard = function(id , title , body , quality) {
     return  `<article id="${id}" class="card-container">
                 <div class="top-card-div">
@@ -20,9 +16,9 @@ var newCard = function(id , title , body , quality) {
 function cardObject(newId) {
     return {
         id: newId,
-        title: titleInput.val(),
-        body: bodyInput.val(),
-        quality: qualityVariable
+        title: $('.title-input').val(),
+        body: $('.body-input').val(),
+        quality: 'swill'
     };
 }
 
@@ -42,12 +38,12 @@ var localStoreCard = function(newId) {
 
 $('.save-btn').on('click', function(event) {
     event.preventDefault();
-    if (titleInput.val() === "" || bodyInput.val() === "") {
+    if ($('.title-input').val() === "" || $('.body-input').val() === "") {
        return false;
     };  
 
     var newId = $.now();
-    $( ".bottom-box" ).append(newCard(newId, titleInput.val(), bodyInput.val(), qualityVariable)); 
+    $( ".bottom-box" ).append(newCard(newId, $('.title-input').val(), $('.body-input').val(), 'swill')); 
     localStoreCard(newId);
     $('form')[0].reset();
 });
