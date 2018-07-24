@@ -1,6 +1,5 @@
 var titleInput = $('.title-input');
 var bodyInput = $('.body-input');
-var numCards = 0;
 var qualityVariable = "swill";
 
 var newCard = function(id , title , body , quality) {
@@ -18,24 +17,27 @@ var newCard = function(id , title , body , quality) {
             </article>`
 };
 
-function cardObject() {
+function cardObject(newId) {
     return {
-        id: 'card' + numCards,
+        id: newId,
         title: titleInput.val(),
         body: bodyInput.val(),
         quality: qualityVariable
     };
 }
 
-$.each(localStorage, function() {
+$.each(localStorage, function(key) {
+    if (key === 'length') {
+        return false;
+    } else {
     var cardData = JSON.parse(this);
-    numCards++;
     $( ".bottom-box" ).append(newCard(cardData.id, cardData.title, cardData.body, cardData.quality));
-});
 
-var localStoreCard = function() {
-    var cardString = JSON.stringify(cardObject());
-    localStorage.setItem(numCards - 1, cardString);
+}});
+
+var localStoreCard = function(newId) {
+    var cardString = JSON.stringify(cardObject(newId));
+    localStorage.setItem(newId, cardString);
 }
 
 $('.save-btn').on('click', function(event) {
@@ -44,9 +46,9 @@ $('.save-btn').on('click', function(event) {
        return false;
     };  
 
-    numCards++;
-    $( ".bottom-box" ).append(newCard('card' + numCards, titleInput.val(), bodyInput.val(), qualityVariable)); 
-    localStoreCard();
+    var newId = $.now();
+    $( ".bottom-box" ).append(newCard(newId, titleInput.val(), bodyInput.val(), qualityVariable)); 
+    localStoreCard(newId);
     $('form')[0].reset();
 });
 
@@ -80,20 +82,20 @@ $(".bottom-box").on('click', function(event){
         }
 
     var cardHTML = $(event.target).closest('.card-container');
-    var cardHTMLId = cardHTML.attr('id').charAt(4);
-    var cardObjectInJSON = localStorage.getItem(cardHTMLId - 1);
+    var cardHTMLId = cardHTML.attr('id');
+    var cardObjectInJSON = localStorage.getItem(cardHTMLId);
     var cardObjectInJS = JSON.parse(cardObjectInJSON);
 
     cardObjectInJS.quality = qualityLevel;
 
     var newCardJSON = JSON.stringify(cardObjectInJS);
-    localStorage.setItem(cardHTMLId - 1, newCardJSON);
+    localStorage.setItem(cardHTMLId, newCardJSON);
     }
    
     else if (event.target.className === "delete-button") {
         var cardHTML = $(event.target).closest('.card-container');
-        var cardHTMLId = cardHTML.attr('id').charAt(4);
-        localStorage.removeItem(cardHTMLId - 1);
+        var cardHTMLId = cardHTML.attr('id');
+        localStorage.removeItem(cardHTMLId);
         cardHTML.remove();
     }
 });
