@@ -1,4 +1,4 @@
-var newCard = function(id , title , body , quality) {
+function newCard(id , title , body , quality) {
     return  `<article id="${id}" class="card-container">
                 <div class="top-card-div">
                     <h2 class="title-of-card">${title}</h2>
@@ -31,7 +31,7 @@ $.each(localStorage, function(key) {
 
 }});
 
-var localStoreCard = function(newId) {
+function localStoreCard (newId) {
     var cardString = JSON.stringify(cardObject(newId));
     localStorage.setItem(newId, cardString);
 }
